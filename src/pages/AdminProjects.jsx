@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API = "http://10.190.128.140:5000/api";
+import API from "../api";
 
 function AdminProjects() {
   const [projects, setProjects] = useState([]);

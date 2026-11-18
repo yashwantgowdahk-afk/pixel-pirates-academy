@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const API = "http://10.190.128.140:5000/api";
+import API from "../api";
 
 function CourseDetails() {
   const { id } = useParams();

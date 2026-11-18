@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/pixel-pirates-logo.jpeg";
 import "../App.css";
 
-const API = "http://10.190.128.140:5000/api";
+import API from "../api";
 
 function Home() {
   const [courses, setCourses] = useState([]);

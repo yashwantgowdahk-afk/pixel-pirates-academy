@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API = "http://10.190.128.140:5000/api";
+import API from "../api";
 
 const emptyModule = () => ({
   title: "",

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API = "http://10.190.128.140:5000/api";
+import API from "../api";
 
 function Videos() {
   const [videos, setVideos] = useState([]);
@@ -703,7 +703,8 @@ function Videos() {
                 </strong>
 
                 Published videos added through the
-                Admin Videos panel will appear here
+                Admin Videos panel will cd C:\Users\yashw\pixel-pirates-academy\backend
+node resetAdminPassword.jsear here
                 automatically.
 
               </div>

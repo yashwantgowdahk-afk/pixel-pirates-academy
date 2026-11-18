@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../api";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -18,14 +19,12 @@ function AdminLogin() {
 
     try {
       const response = await fetch(
-        "http://10.190.128.140:5000/api/auth/login",
+        `${API}/auth/login`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             email,
             password,
@@ -61,49 +60,30 @@ function AdminLogin() {
 
   return (
     <main className="admin-login-page">
-
       <div className="admin-login-grid"></div>
 
       <div className="admin-login-glow admin-login-glow-one"></div>
       <div className="admin-login-glow admin-login-glow-two"></div>
 
       <div className="admin-login-topbar">
-
-        <div>
-          PIXEL PIRATES ACADEMY
-        </div>
-
-        <div>
-          ADMIN SYSTEM / 001
-        </div>
-
+        <div>PIXEL PIRATES ACADEMY</div>
+        <div>ADMIN SYSTEM / 001</div>
       </div>
 
-
       <section className="admin-login-card">
-
         <div className="admin-login-status">
-
           <span></span>
-
           SECURE ADMIN ACCESS
-
         </div>
-
 
         <div className="admin-login-logo">
-
           <div className="admin-login-logo-ring"></div>
-
           <span>PP</span>
-
         </div>
-
 
         <p className="admin-login-overline">
           PIXEL PIRATES / CONTROL SYSTEM
         </p>
-
 
         <h1>
           ENTER
@@ -111,19 +91,16 @@ function AdminLogin() {
           <span>THE COMMAND CENTER.</span>
         </h1>
 
-
         <p className="admin-login-description">
           Manage academy content, courses, projects,
           achievements, events, team profiles,
           registrations and media.
         </p>
 
-
         <form
           className="admin-login-form"
           onSubmit={handleLogin}
         >
-
           <label>
             ADMIN EMAIL
 
@@ -137,9 +114,7 @@ function AdminLogin() {
               required
               autoComplete="email"
             />
-
           </label>
-
 
           <label>
             PASSWORD
@@ -154,16 +129,13 @@ function AdminLogin() {
               required
               autoComplete="current-password"
             />
-
           </label>
-
 
           {error && (
             <div className="admin-login-error">
               {error}
             </div>
           )}
-
 
           <button
             type="submit"
@@ -174,48 +146,22 @@ function AdminLogin() {
               ? "AUTHENTICATING..."
               : "ENTER COMMAND CENTER"}
 
-            <span>
-              →
-            </span>
-
+            <span>→</span>
           </button>
-
         </form>
 
-
         <div className="admin-login-footer">
-
-          <span>
-            ENCRYPTED SESSION
-          </span>
-
-          <span>
-            JWT AUTH
-          </span>
-
-          <span>
-            SYSTEM ONLINE
-          </span>
-
+          <span>ENCRYPTED SESSION</span>
+          <span>JWT AUTH</span>
+          <span>SYSTEM ONLINE</span>
         </div>
-
       </section>
 
-
       <div className="admin-login-bottom">
-
-        <span>
-          PP / ADMIN
-        </span>
-
+        <span>PP / ADMIN</span>
         <div></div>
-
-        <span>
-          AUTHORIZED PERSONNEL ONLY
-        </span>
-
+        <span>AUTHORIZED PERSONNEL ONLY</span>
       </div>
-
     </main>
   );
 }

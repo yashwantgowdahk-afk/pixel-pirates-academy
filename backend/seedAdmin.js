@@ -1,42 +1,34 @@
+
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
-
 const connectDB = require("./config/db");
 const Admin = require("./models/Admin");
 
-const seedAdmin = async () => {
+const resetAdminPassword = async () => {
   try {
     await connectDB();
 
-    const existingAdmin = await Admin.findOne({
-      email: process.env.ADMIN_EMAIL,
-    });
+    const email = process.env.ADMIN_EMAIL;
+    const newPassword = process.env.ADMIN_PASSWORD;
 
-    if (existingAdmin) {
-      console.log("Admin already exists.");
-      process.exit(0);
+    const admin = await Admin.findOne({ email });
+
+    if (!admin) {
+      console.log("Admin not found. Run seedAdmin.js first.");
+      process.exit(1);
     }
 
-    const hashedPassword = await bcrypt.hash(
-      process.env.ADMIN_PASSWORD,
-      12
-    );
+    admin.password = await bcrypt.hash(newPassword, 12);
+    await admin.save();
 
-    await Admin.create({
-      name: "Pixel Pirates Administrator",
-      email: process.env.ADMIN_EMAIL,
-      password: hashedPassword,
-      role: "admin",
-    });
-
-    console.log("Admin account created successfully.");
-
+    console.log("Admin password updated successfully!");
     process.exit(0);
   } catch (error) {
-    console.error("Admin seed error:", error.message);
+    console.error("Password reset error:", error);
     process.exit(1);
   }
 };
 
-seedAdmin();
+resetAdminPassword();
+

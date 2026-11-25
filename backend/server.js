@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const express = require("express");
@@ -17,22 +18,25 @@ const registrationRoutes = require("./routes/registrations");
 
 const app = express();
 
+// Connect MongoDB
 connectDB();
 
 /*
-  Frontend development servers may use 5173, 5174 or 5175
-  when another Vite process is already using a port.
+  Allowed frontend origins:
+  Local development + deployed Vercel website
 */
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
-];
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
+// CORS configuration
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests such as Postman/server-side requests
+      // Allow requests without an origin, such as Postman
       if (!origin) {
         return callback(null, true);
       }
@@ -49,6 +53,7 @@ app.use(
   })
 );
 
+// Middleware
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -70,9 +75,11 @@ app.get("/", (req, res) => {
   });
 });
 
+// Render automatically provides PORT
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(
-    `Pixel Pirates API running on http://0.0.0.0:${PORT}`
+    `Pixel Pirates API running on port ${PORT}`
   );
 });
